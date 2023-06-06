@@ -27,7 +27,7 @@ const vaciarCarrito = () =>{
                 break;
             default:
                 alert("Opción inválida, intente nuevamente");  
-                break;  
+                break; 
         }
     }while(respuesta != "no" && respuesta != "si");
 }
