@@ -1,0 +1,76 @@
+.footer{
+    border-top: 2px solid black;
+    background:linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.4)
+        ),url("../assets/img/footer.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+       
+    padding-top: 30px;
+    .footer__style{
+        text-align: center;
+        padding:3vh 0vh;
+        color:white;
+        margin: 0;
+        .footer__nav {
+            margin: 0;
+            li{
+                margin: 10px;
+                list-style: none;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+                margin: 25px;
+                font-size: 1rem;
+                position: relative;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 1px;
+                    background-color: white;                    
+                    transform: scaleX(0);      
+                    transform-origin: left;  
+                    transition: transform 0.5s;
+                }
+                &::after{
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 1px;
+                    background-color:white;                    
+                    transform: scaleX(0);      
+                    transform-origin: right;  
+                    transition: transform 0.5s;
+                }
+                &:hover::before{
+                    transform: scaleX(1);
+                }
+                &:hover::after{
+                    transform: scaleX(1);
+                }
+            }
+        }
+    }
+    .footer__social {
+        a{
+            font-size: 2.5rem;
+            margin-top: 50px;
+            text-decoration: none;
+            color:  white;
+            margin: 25px;
+            transition: color 0.25s linear;
+            &:hover{
+                color:green;
+            }
+        }
+    }    
+}
