@@ -111,5 +111,8 @@ const mostrarMenu = () =>{
 
     }
 }
+
+let boton = document.getElementById("boton__item");
+boton.onclick = () => {agregarCarrito(productos[1].precio,1, itemsCarrito(productos[1].nombre, productos[1].marca ,productos[1].precio, 1))}
 alert("Bienvenido a la tienda")
 mostrarMenu();
