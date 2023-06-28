@@ -6,7 +6,7 @@ let productos = [
     {nombre:'Creatina', marca:'Nutrilab', precio: 900},{nombre:'Creatina', marca:'ENA', precio: 2000},{nombre:'Creatina', marca:'Xbody', precio: 1000},{nombre:'Creatina', marca:'AMZ', precio: 1500},
     {nombre:'Proteina', marca:'ENA', precio: 1500},{nombre:'Proteina', marca:'Star Nutrition', precio: 2000},{nombre:'Proteina', marca:'Xbody', precio: 900},{nombre:'Proteina', marca:'ENA X-pro', precio: 1000}
 ];
-let listaItems = ("Creatinas: \n 1_Creatina Nutrilab: $900 \n 2_Creatina ENA: $2000 \n 3_Creatina Xbody: $1000 \n 4_Creatina AMZ: $1500 \n Proteinas: \n 5_Proteina ENA: $1500 \n 6_Proteina Star Nutrition: $2000 \n 7_Proteina Xbody: $900 \n 8_Proteina ENA x-pro: $1000 \n")
+let listaItems = ("1_Creatina Nutrilab: $900 \n 2_Creatina ENA: $2000 \n 3_Creatina Xbody: $1000 \n 4_Creatina AMZ: $1500 \n 5_Proteina ENA: $1500 \n 6_Proteina Star Nutrition: $2000 \n 7_Proteina Xbody: $900 \n 8_Proteina ENA x-pro: $1000 \n")
 
 
 const agregarCarrito = (precio,cantidad) =>{
