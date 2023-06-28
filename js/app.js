@@ -128,7 +128,10 @@ const mostrarMenu = () =>{
     }
 }
 
-let boton = document.getElementById("boton__item");
-boton.onclick = () => {agregarCarrito(productos[1].precio,1, itemsCarrito(productos[1].nombre, productos[1].marca ,productos[1].precio, 1))}
-alert("Bienvenido a la tienda");
+let botonMostrarMenu = document.getElementById("mostrarMenu");
+let botonVaciarCarrito = document.getElementById("vaciarCarrito");
+let botonMostrarCarrito = document.getElementById("mostrarCarrito");
+botonMostrarMenu.onclick = () => {mostrarMenu()}
+botonVaciarCarrito.onclick = () => {vaciarCarrito()}
+botonMostrarCarrito.onclick = () => {mostrarCarrito()}
 mostrarMenu();
