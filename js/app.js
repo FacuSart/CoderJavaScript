@@ -109,6 +109,7 @@ const mostrarMenu = () =>{
                 }while(continuar !== "no" && continuar !== "si");
 
             }while(continuar !== "no");
+            mostrarMenu();
             break;
         case 2:
             vaciarCarrito();
