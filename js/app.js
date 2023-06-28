@@ -53,6 +53,7 @@ const vaciarCarrito = () =>{
                 break; 
         }
     }while(respuesta != "no" && respuesta != "si");
+    mostrarMenu();
 }
 
 const mostrarCarrito = () =>{
@@ -62,7 +63,7 @@ const mostrarCarrito = () =>{
     }else{
         alert("Su carrito está vacío");
     }
-    
+    mostrarMenu();
 }
 
 const agregarItem = (array) => {
@@ -72,7 +73,7 @@ const agregarItem = (array) => {
     let nuevoProd = {nombre: nombre, marca: marca, precio: precio}
     array.push(nuevoProd)
     listaItems += (" "+productos.length+"_"+nombre+" "+marca+": $"+precio+"\n")
-    return array;
+    mostrarMenu();
 }
 
 const mostrarMenu = () =>{
@@ -96,6 +97,7 @@ const mostrarMenu = () =>{
                 if(opcionCompra <= 0 || opcionCompra >productos.length){
                     alert("Opción no válida, intente nuevamente");
                     mostrarMenu();
+                    break;
                 }
                 
 
@@ -110,13 +112,12 @@ const mostrarMenu = () =>{
             break;
         case 2:
             vaciarCarrito();
-            break;     
+            break; 
         case 3:
             mostrarCarrito();
             break;
         case 4:
             agregarItem(productos);
-            mostrarMenu();
             break;
         case 5:
             break;    
