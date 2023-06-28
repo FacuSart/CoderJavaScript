@@ -6,7 +6,7 @@ let productos = [
     {nombre:'Creatina', marca:'Nutrilab', precio: 900},{nombre:'Creatina', marca:'ENA', precio: 2000},{nombre:'Creatina', marca:'Xbody', precio: 1000},{nombre:'Creatina', marca:'AMZ', precio: 1500},
     {nombre:'Proteina', marca:'ENA', precio: 1500},{nombre:'Proteina', marca:'Star Nutrition', precio: 2000},{nombre:'Proteina', marca:'Xbody', precio: 900},{nombre:'Proteina', marca:'ENA X-pro', precio: 1000}
 ];
-
+let listaItems = ("Creatinas: \n 1_Creatina Nutrilab: $900 \n 2_Creatina ENA: $2000 \n 3_Creatina Xbody: $1000 \n 4_Creatina AMZ: $1500 \n Proteinas: \n 5_Proteina ENA: $1500 \n 6_Proteina Star Nutrition: $2000 \n 7_Proteina Xbody: $900 \n 8_Proteina ENA x-pro: $1000 \n")
 
 
 const agregarCarrito = (precio,cantidad) =>{
@@ -30,10 +30,10 @@ const itemsCarrito = (nombre, marca, precio, cantidad) =>{
         }
     }
     i++;
-
     console.log(carrito.length)
     return carrito[i-1];
 }
+
 const vaciarCarrito = () =>{
     let respuesta;
     do{
@@ -65,15 +65,25 @@ const mostrarCarrito = () =>{
     
 }
 
-const mostrarMenu = () =>{
+const agregarItem = (array) => {
+    let nombre = prompt("Ingrese nombre del producto");
+    let marca = prompt("Ingrese marca del producto");
+    let precio = parseFloat(prompt("Ingrese precio del producto"));
+    let nuevoProd = {nombre: nombre, marca: marca, precio: precio}
+    array.push(nuevoProd)
+    listaItems += (" "+productos.length+"_"+nombre+" "+marca+": $"+precio+"\n")
+    return array;
+}
 
-    opcion = parseInt(prompt("El total de su carrito es de: $"+total+ "\nQue operación desea realizar: \n 1_Comprar Producutos. \n 2_Vaciar Carrito. \n 3_Mostrar Carrito."));
+const mostrarMenu = () =>{
+    
+    opcion = parseInt(prompt("El total de su carrito es de: $"+total+ "\nQue operación desea realizar: \n 1_Comprar Producutos. \n 2_Vaciar Carrito. \n 3_Mostrar Carrito. \n 4_Agregar Item.\n 5_Salir."));
 
     switch (opcion){
         case 1:
             let continuar = "";
             do{
-                let opcionCompra = parseInt (prompt("Creatinas: \n 1_Creatina Nutrilab: $900 \n 2_Creatina ENA: $2000 \n 3_Creatina Xbody: $1000 \n 4_Creatina AMZ: $1500 \n Proteinas: \n 5_Proteina ENA: $1500 \n 6_Proteina Star Nutrition: $2000 \n 7_Proteina Xbody: $900 \n 8_Proteina ENA x-pro: $1000 \n "));
+                let opcionCompra = parseInt (prompt(listaItems));
                 let cantidad = 0;
                 function definirCant (){
                     cantidad = parseInt(prompt("Ingrese cantidad"))
@@ -103,6 +113,12 @@ const mostrarMenu = () =>{
             break;     
         case 3:
             mostrarCarrito();
+            break;
+        case 4:
+            agregarItem(productos);
+            mostrarMenu();
+            break;
+        case 5:
             break;    
         default:
             alert("Opción no válida, intente nuevamente");
@@ -114,5 +130,5 @@ const mostrarMenu = () =>{
 
 let boton = document.getElementById("boton__item");
 boton.onclick = () => {agregarCarrito(productos[1].precio,1, itemsCarrito(productos[1].nombre, productos[1].marca ,productos[1].precio, 1))}
-alert("Bienvenido a la tienda")
+alert("Bienvenido a la tienda");
 mostrarMenu();
