@@ -17,12 +17,24 @@
     background-position: center;
     background-repeat: repeat;
     background-size: auto;
-    
+    // @include background(center,repeat,auto);
+    background-attachment: fixed;
     .main__tienda__navbar{
         height: auto;
         text-align: center;
+        
     }
-    .conteiner-fluid{
+    .conteiner__fluid{
+        min-height: 75vh;
+        #prox-text{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 75%;
+            font-size: 4rem;
+            background-color: rgba(0, 0, 0, 0);
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+        }
         div{
             div{
                 img{
@@ -34,14 +46,14 @@
                 }
                 
                .conteiner{
-                    .border-radius{
+                    .border__radius{
                         border-radius: 10px;
                     }
                     .button__tienda{
                         background-color: transparent;
                         transition: background-color 0.20s linear;
                         &:hover{
-                            background-color: green;
+                            background-color: green1;
                         }
                         a{
                             color: white;
@@ -54,4 +66,20 @@
     }
         
 }
+@media screen and (min-width:0px) and (max-width:768px){
+    .main__tienda{
+        .conteiner__fluid{
+            #prox-text{
+                font-size: 2.5rem;
+                
+            }
+        }
+    }
+}
+
+
+
+
+
+
 @import "footer.scss";
