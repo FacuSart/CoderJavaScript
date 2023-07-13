@@ -81,7 +81,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Tu carrito:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body p-0">
                 <!-- <h2 class="text-white text-center fs-1 fw-bold text-decoration-underline py-5" data-aos="fade-down" data-aos-duration="1000">Carrito</h2>
         <button id="vaciarCarrito" class="btn btn-outline-danger mb-5" type="submit">
           Vaciar Carrito
@@ -89,11 +89,12 @@
                 <table class="table table-striped w-100">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
                       <th scope="col">Producto</th>
                       <th scope="col">Marca</th>
-                      <th scope="col">Cantidad</th>
                       <th scope="col">Precio</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Subtotal</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody id="tbody">
@@ -104,13 +105,15 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td id="total">TOTAL: $0</td>
                   </tfoot>
                 </table>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="vaciarCarrito">Vaciar</button>
+                <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                <button type="button" class="btn btn-danger" id="vaciarCarrito">Vaciar</button>
               </div>
             </div>
           </div>
@@ -118,6 +121,7 @@
       </section>
       
       <section class="conteiner__fluid" id="divTienda">
+        
         <!-- <h2 id="prox-text" class="text-white text-center m-0" data-aos="fade-down" data-aos-duration="1000">Próximamente...</h2> -->
         <h2 class="text-white text-center fs-1 text-decoration-underline py-5" data-aos="fade-down" data-aos-duration="1000">Creatinas</h2>
         <div class="row w-100 m-0 justify-content-evenly">
@@ -126,7 +130,7 @@
               <div class="conteiner  my-4 flex-column d-flex">
                   <h3 class="text-center text-white mb-3">Creatina Nutrilab</h3>
                   <h3 class="text-center text-white mb-3">$1200</h3>
-                  <button value=1200 class="button__tienda w-auto p-2 mx-auto border-white fs-4 text-white border__radius" id="creaNutri">Agregar a carrito</button>
+                  <button class="button__tienda w-auto p-2 mx-auto border-white fs-4 text-white border__radius" id="creaNutri">Agregar a carrito</button>
               </div>
           </div>
           <div class="col-md-2 col-8 p-0 mx-auto my-5 bg-transparent" data-aos="fade" data-aos-duration="1300">
@@ -244,5 +248,6 @@
     <script>
       AOS.init();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
