@@ -78,7 +78,7 @@ function crearTabla(item){
     }
     carritoJSON = JSON.stringify(carrito)
     localStorage.setItem('carrito',carritoJSON)
-    
+
 }
 
 
@@ -123,22 +123,41 @@ for(item of carrito){
 
 
 function removerItem(index){
+
   if(carrito.length === 1){
-    bodyTabla.innerHTML = ``;
-    total = 0;
-    carrito = [];
-    index = 0;
-    actualizarCarrito(index,carrito);
-    totalTabla.innerHTML = `TOTAL: $${total}`;
-  }else{
-    total -= carrito[index].precio * carrito[index].cantidad
-    carrito.splice(index,1)
-    bodyTabla.innerHTML=``;
-    for(let i = index;i<carrito.length;i++){
-      carrito[i].index -= 1;
+ 
+    if(carrito[index].cantidad===1){
+      bodyTabla.innerHTML = ``;
+      carrito = [];
+      index = 0;
+      total = 0;
+      totalTabla.innerHTML = `TOTAL: $${total}`;
+    }else{
+      total -= carrito[index].precio
+      bodyTabla.innerHTML=``;
+      carrito[index].cantidad -=1;
+      index = JSON.parse(localStorage.getItem('index'))
     }
-    index = JSON.parse(localStorage.getItem('index'))
-    index -= 1;
+
+
+  }else{
+
+    total -= carrito[index].precio
+    if(carrito[index].cantidad===1){
+      carrito.splice(index,1)
+      bodyTabla.innerHTML=``;
+      for(let i = index;i<carrito.length;i++){
+        carrito[i].index -= 1;
+      }
+      index = JSON.parse(localStorage.getItem('index'))
+      index -= 1;
+    }else{
+      bodyTabla.innerHTML=``;
+      carrito[index].cantidad -=1;
+      index = JSON.parse(localStorage.getItem('index'))
+    }
+    
+  }
     actualizarCarrito(index,carrito);
     for(item of carrito){
       bodyTabla.innerHTML = bodyTabla.innerHTML + `
@@ -152,6 +171,6 @@ function removerItem(index){
               </tr>
               `;
       totalTabla.innerHTML = `TOTAL: $${total}`;
-    } 
-  }
+    }
 }
+ 
