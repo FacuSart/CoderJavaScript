@@ -34,14 +34,14 @@ botonVaciarCarrito.onclick = () => {vaciarCarrito()}
 let botonComprarCarrito = document.getElementById("comprarCarrito");
 botonComprarCarrito.onclick = () => {comprarCarrito()}
 
-function actualizarCarrito (){
+function actualizarCarrito (index,carrito){
   localStorage.setItem('index',index);
   localStorage.setItem('carrito',(JSON.stringify(carrito)));
 }
 
 function crearTabla(item){
     item.cantidad=1;
-
+    index = JSON.parse(localStorage.getItem('index'))
     //Verifico si el item seleccionado por el usuario ya esta en la tabla y carrito
     nuevoItem = verificarItem(item);
     //Si existe reemplazo la cantidad y el subtotal de ese producto
@@ -98,7 +98,7 @@ function vaciarCarrito(){
   total = 0;
   carrito = [];
   index = 0;
-  actualizarCarrito();
+  actualizarCarrito(index,carrito);
   totalTabla.innerHTML = `TOTAL: $${total}`;
 
 }
@@ -123,14 +123,13 @@ for(item of carrito){
 
 
 function removerItem(index){
-  console.log(carrito.length)
   if(carrito.length === 1){
-    bodyTabla.innerHTML = ``,
-    total = 0,
-    carrito = [],
-    index = 0,
-    actualizarCarrito(),
-    totalTabla.innerHTML = `TOTAL: $${total}`
+    bodyTabla.innerHTML = ``;
+    total = 0;
+    carrito = [];
+    index = 0;
+    actualizarCarrito(index,carrito);
+    totalTabla.innerHTML = `TOTAL: $${total}`;
   }else{
     total -= carrito[index].precio * carrito[index].cantidad
     carrito.splice(index,1)
@@ -138,7 +137,9 @@ function removerItem(index){
     for(let i = index;i<carrito.length;i++){
       carrito[i].index -= 1;
     }
-    actualizarCarrito();
+    index = JSON.parse(localStorage.getItem('index'))
+    index -= 1;
+    actualizarCarrito(index,carrito);
     for(item of carrito){
       bodyTabla.innerHTML = bodyTabla.innerHTML + `
               <tr>
