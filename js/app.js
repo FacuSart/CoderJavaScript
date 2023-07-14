@@ -167,7 +167,7 @@ function removerItem(index){
                   <td>${item.precio}</td>
                   <td id="cant${item.nombre}${item.marca}">${item.cantidad}</td>
                   <td id="precio${item.nombre}${item.marca}">${item.precio * item.cantidad}</td>
-                  <td class="p-1"><button type="button" class="btn btn-danger" id="removeItem" onclick="removerItem(${item.index})">Remover</button></td>
+                  <td class="p-1"><button type="button" class="btn btn-danger" onclick="removerItem(${item.index})">Remover</button></td>
               </tr>
               `;
       totalTabla.innerHTML = `TOTAL: $${total}`;
