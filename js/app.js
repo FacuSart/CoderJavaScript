@@ -1,13 +1,20 @@
 let carrito = [];
 let total = 0;
-index = JSON.parse(localStorage.getItem('index'));
 let carritoJSON;
 let nuevoItem;
-let productos = [
-    {nombre:'Creatina', marca:'Nutrilab', precio: 1200},{nombre:'Creatina', marca:'ENA', precio: 3000},{nombre:'Creatina', marca:'Xbody', precio: 1500},{nombre:'Creatina', marca:'AMZ', precio: 2000},
-    {nombre:'Proteina', marca:'ENA', precio: 4000},{nombre:'Proteina', marca:'Star Nutrition', precio: 4000},{nombre:'Proteina', marca:'Xbody', precio: 3000},{nombre:'Proteina', marca:'ENA X-pro', precio: 5000}
-];
+let productos = [];
+index = JSON.parse(localStorage.getItem('index'));
 carrito = JSON.parse(localStorage.getItem('carrito'))
+
+async function fetchData() {
+  await fetch("./js/model/prod.json")
+  .then(response => response.json())
+  .then(data => {
+    for(let i = 0;i < data.length;i++){
+    productos[i] = data[i]};
+  })
+}
+fetchData();
 
 const bodyTabla = document.getElementById("tbody");
 const totalTabla = document.getElementById("total")
@@ -42,7 +49,7 @@ function actualizarCarrito (index,carrito){
 function crearTabla(item){
     item.cantidad=1;
     index = JSON.parse(localStorage.getItem('index'))
-    //Verifico si el item seleccionado por el usuario ya esta en la tabla y carrito
+    //Verifico si el item seleccionado por el usuario ya está en la tabla y carrito
     nuevoItem = verificarItem(item);
     //Si existe reemplazo la cantidad y el subtotal de ese producto
     if(nuevoItem){
@@ -78,9 +85,15 @@ function crearTabla(item){
     }
     carritoJSON = JSON.stringify(carrito)
     localStorage.setItem('carrito',carritoJSON)
-
+    Toastify({
+      text: "Producto añadido",
+      className: "info",
+      style: {
+        background: "#00b09b",
+      }
+    }).showToast();
+    
 }
-
 
 
 function verificarItem(item){
@@ -94,13 +107,29 @@ function verificarItem(item){
 }
 
 function vaciarCarrito(){
-  bodyTabla.innerHTML = ``;
-  total = 0;
-  carrito = [];
-  index = 0;
-  actualizarCarrito(index,carrito);
-  totalTabla.innerHTML = `TOTAL: $${total}`;
-
+  Swal.fire({
+    title: 'Estás seguro?',
+    text: "No podrás revertir esto!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, estoy seguro!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      bodyTabla.innerHTML = ``;
+      total = 0;
+      carrito = [];
+      index = 0;
+      actualizarCarrito(index,carrito);
+      totalTabla.innerHTML = `TOTAL: $${total}`;
+      Swal.fire(
+        'Vaciado!',
+        'Tu carrito ha sido vaciado.',
+        'Hecho'
+      )
+    }
+  })
 }
 
 
