@@ -168,12 +168,7 @@ function removerItem(index){
       index = 0;
       total = 0;
       totalTabla.innerHTML = `TOTAL: $${total}`;
-      Toastify({
-        text: "Producto eliminado",
-        style: {
-          background: "#FF0000",
-        }
-      }).showToast();
+      
     }else{
       //Sino, solo resto 1 a cantidad
       total -= carrito[index].precio
@@ -203,6 +198,12 @@ function removerItem(index){
     }
     
   }
+  Toastify({
+    text: "Producto eliminado",
+    style: {
+      background: "#FF0000",
+    }
+  }).showToast();
     actualizarCarrito(index,carrito);
     for(item of carrito){
       bodyTabla.innerHTML = bodyTabla.innerHTML + `
@@ -218,8 +219,9 @@ function removerItem(index){
       totalTabla.innerHTML = `TOTAL: $${total}`;
     }
 }
- 
-
+if(carrito === null && index ===null){
+  actualizarCarrito(0,[]);
+}
 for(item of carrito){
     bodyTabla.innerHTML = bodyTabla.innerHTML + `
             <tr>
