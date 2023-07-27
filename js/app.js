@@ -19,6 +19,8 @@ fetchData();
 const bodyTabla = document.getElementById("tbody");
 const totalTabla = document.getElementById("total")
 
+
+
 let creaNutri = document.getElementById("creaNutri")
 creaNutri.onclick = ()=>{crearTabla(productos[0])}
 let creaEna = document.getElementById("creaEna")
@@ -41,10 +43,31 @@ botonVaciarCarrito.onclick = () => {vaciarCarrito()}
 let botonComprarCarrito = document.getElementById("comprarCarrito");
 botonComprarCarrito.onclick = () => {comprarCarrito()}
 
+let filtroProteinas = document.getElementById("btnProte");
+filtroProteinas.onclick = () => {mostrarProteinas()}
+let filtroCreatinas = document.getElementById("btnCrea");
+filtroCreatinas.onclick = () => {mostrarCreatinas()}
+let btnReiniciar = document.getElementById("btnReiniciar");
+btnReiniciar.onclick = () => {reinicioFiltro()}
+
 function actualizarCarrito (index,carrito){
   localStorage.setItem('index',index);
   localStorage.setItem('carrito',(JSON.stringify(carrito)));
 }
+
+function mostrarProteinas(){
+  document.getElementById("creatinas").className = "row w-100 m-0 justify-content-evenly d-none"
+  document.getElementById("proteinas").className="row w-100 m-0 justify-content-evenly"
+}
+function mostrarCreatinas(){
+  document.getElementById("creatinas").className = "row w-100 m-0 justify-content-evenly"
+  document.getElementById("proteinas").className="row w-100 m-0 justify-content-evenly d-none"
+}
+function reinicioFiltro(){
+  document.getElementById("creatinas").className = "row w-100 m-0 justify-content-evenly"
+  document.getElementById("proteinas").className="row w-100 m-0 justify-content-evenly"
+}
+
 
 function crearTabla(item){
     item.cantidad=1;
@@ -64,7 +87,8 @@ function crearTabla(item){
 
         totalTabla.innerHTML = `TOTAL: $${total}`;
         
-    }else{
+    }//Si no existe lo creo como un elemento nuevo en la tabla, modifico el total y aumento el indice en 1
+    else{
       item.index = index;
       bodyTabla.innerHTML = bodyTabla.innerHTML + `
           <tr>
@@ -83,6 +107,7 @@ function crearTabla(item){
       localStorage.setItem('index',index)
       carrito[index-1]=item;       
     }
+    //Actualizo el localStorage del carrito
     carritoJSON = JSON.stringify(carrito)
     localStorage.setItem('carrito',carritoJSON)
     Toastify({
@@ -133,35 +158,24 @@ function vaciarCarrito(){
 }
 
 
-for(item of carrito){
-    bodyTabla.innerHTML = bodyTabla.innerHTML + `
-            <tr>
-                <td>${item.nombre}</td>
-                <td>${item.marca}</td>
-                <td>${item.precio}</td>
-                <td id="cant${item.nombre}${item.marca}">${item.cantidad}</td>
-                <td id="precio${item.nombre}${item.marca}">${item.precio * item.cantidad}</td>
-                <td class="p-1"><button type="button" class="btn btn-danger" onclick="removerItem(${item.index})">Remover</button></td>
-            </tr>
-            `;
-    total += item.precio * item.cantidad
-    
-    totalTabla.innerHTML = `TOTAL: $${total}`;
-}
-
-
-
 function removerItem(index){
-
   if(carrito.length === 1){
- 
+    
+    //Si el carrito solo tiene un item y una unidad, lo vacio por completo
     if(carrito[index].cantidad===1){
       bodyTabla.innerHTML = ``;
       carrito = [];
       index = 0;
       total = 0;
       totalTabla.innerHTML = `TOTAL: $${total}`;
+      Toastify({
+        text: "Producto eliminado",
+        style: {
+          background: "#FF0000",
+        }
+      }).showToast();
     }else{
+      //Sino, solo resto 1 a cantidad
       total -= carrito[index].precio
       bodyTabla.innerHTML=``;
       carrito[index].cantidad -=1;
@@ -170,9 +184,10 @@ function removerItem(index){
 
 
   }else{
-
+    
     total -= carrito[index].precio
     if(carrito[index].cantidad===1){
+       //Si el carrito tiene mas de un item y una sola unidad, elimino el item del carrito y disminuyo el indice en 1
       carrito.splice(index,1)
       bodyTabla.innerHTML=``;
       for(let i = index;i<carrito.length;i++){
@@ -181,6 +196,7 @@ function removerItem(index){
       index = JSON.parse(localStorage.getItem('index'))
       index -= 1;
     }else{
+      //Sino, solo resto 1 a cantidad
       bodyTabla.innerHTML=``;
       carrito[index].cantidad -=1;
       index = JSON.parse(localStorage.getItem('index'))
@@ -203,3 +219,19 @@ function removerItem(index){
     }
 }
  
+
+for(item of carrito){
+    bodyTabla.innerHTML = bodyTabla.innerHTML + `
+            <tr>
+                <td>${item.nombre}</td>
+                <td>${item.marca}</td>
+                <td>${item.precio}</td>
+                <td id="cant${item.nombre}${item.marca}">${item.cantidad}</td>
+                <td id="precio${item.nombre}${item.marca}">${item.precio * item.cantidad}</td>
+                <td class="p-1"><button type="button" class="btn btn-danger" onclick="removerItem(${item.index})">Remover</button></td>
+            </tr>
+            `;
+    total += item.precio * item.cantidad
+    
+    totalTabla.innerHTML = `TOTAL: $${total}`;
+}
