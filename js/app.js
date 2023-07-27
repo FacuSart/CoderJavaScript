@@ -160,7 +160,6 @@ function vaciarCarrito(){
 
 function removerItem(index){
   if(carrito.length === 1){
-    
     //Si el carrito solo tiene un item y una unidad, lo vacio por completo
     if(carrito[index].cantidad===1){
       bodyTabla.innerHTML = ``;
@@ -219,9 +218,13 @@ function removerItem(index){
       totalTabla.innerHTML = `TOTAL: $${total}`;
     }
 }
-if(carrito === null && index ===null){
-  actualizarCarrito(0,[]);
+
+if(carrito === null){
+  carrito = []
+  actualizarCarrito(0,carrito);
 }
+
+
 for(item of carrito){
     bodyTabla.innerHTML = bodyTabla.innerHTML + `
             <tr>
