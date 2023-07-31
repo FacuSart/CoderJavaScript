@@ -219,13 +219,14 @@ function removerItem(index){
     }
 }
 
-if(carrito === null){
-  carrito = []
-  actualizarCarrito(0,carrito);
-}
+document.addEventListener('DOMContentLoaded', async () =>{
 
+  if(carrito === null){
+    carrito = []
+    actualizarCarrito(0,carrito);
+  }
 
-for(item of carrito){
+  for(item of carrito){
     bodyTabla.innerHTML = bodyTabla.innerHTML + `
             <tr>
                 <td>${item.nombre}</td>
@@ -239,4 +240,6 @@ for(item of carrito){
     total += item.precio * item.cantidad
     
     totalTabla.innerHTML = `TOTAL: $${total}`;
-}
+  }
+
+})
